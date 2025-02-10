@@ -3,11 +3,19 @@ const db = require('../config/db');
 // Obtener todos los clientes
 exports.getClientes = (req, res) => {
   const query = `
-        SELECT c.id, c.nombre, c.nombre_comercial, c.rif, c.direccion_fiscal, c.pais, 
-               e.nombre AS estado, u.nombre AS unidad_negocio
-        FROM cliente c
-        JOIN estados_venezuela e ON c.estado_id = e.id
-        JOIN unidad_negocio u ON c.unidad_negocio_id = u.id
+       SELECT 
+    c.id, 
+    c.nombre, 
+    c.email, 
+    c.telefono, 
+    c.direccion, 
+    c.unidad_negocio, 
+    c.razon_social, 
+    c.nombre_comercial, 
+    r.nombre AS region
+FROM clientes c
+LEFT JOIN regiones r ON c.id_region = r.id;
+
     `;
 
   db.query(query, (err, results) => {
