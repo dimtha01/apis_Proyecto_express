@@ -3,13 +3,13 @@ require('dotenv').config();
 
 // Crear un pool de conexiones con MySQL
 const db = mysql.createPool({
-    host: process.env.DB_HOST,       // Host proporcionado por Railway (ejemplo: junction.proxy.rlwy.net)
-    user: process.env.DB_USER,       // Usuario de la base de datos (ejemplo: root)
-    password: process.env.DB_PASS,   // Contraseña de la base de datos
-    database: process.env.DB_NAME,   // Nombre de la base de datos (ejemplo: railway)
-    port: parseInt(process.env.PORT, 10), // Puerto personalizado proporcionado por Railway (ejemplo: 43411)
+    host: process.env.MYSQLHOST || 'localhost',       // Host proporcionado por Railway (ejemplo: junction.proxy.rlwy.net)
+    user: process.env.MYSQLUSER || 'root',           // Usuario de la base de datos (ejemplo: root)
+    password: process.env.MYSQLPASSWORD,            // Contraseña de la base de datos
+    database: process.env.MYSQLDATABASE,            // Nombre de la base de datos (ejemplo: railway)
+    port: parseInt(process.env.MYSQLPORT, 10) || 3306, // Puerto personalizado proporcionado por Railway (ejemplo: 43411)
     ssl: {
-        rejectUnauthorized: true     // Habilitar SSL para conexiones seguras
+        rejectUnauthorized: true                    // Habilitar SSL para conexiones seguras
     }
 });
 
